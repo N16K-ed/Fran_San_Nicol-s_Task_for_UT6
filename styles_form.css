@@ -43,3 +43,11 @@ nav > ul{
         text-decoration: none;
     }
 }
+.form{
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 30%;
+    box-shadow: #505050 1px 1px 1px;
+}
