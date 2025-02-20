@@ -6,7 +6,7 @@
 body{ 
     margin-top: 0;   
     background-color: white;
-    color: black;
+    color: black;    
 }
 .navi_bar{
     top: 0;
@@ -43,11 +43,41 @@ nav > ul{
         text-decoration: none;
     }
 }
-.form{
-    
+.container{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 30%;
-    box-shadow: #505050 1px 1px 1px;
+    flex-direction: column;    
+    align-items: center;
+}
+.form{
+    margin-top: 40px;        
+    padding: 20px;
+    width: 500px;
+    height: auto;
+    box-shadow: lightgray 1px 1px 1px 1px;
+    border-radius: 5px;
+    label{
+        font-weight: 600;
+       
+    }
+    input[type="text"],input[type="email"]{
+        width: 100%;
+        
+        padding: 2px;
+        
+    }
+    input[type="submit"]{
+        width: 101.3%;        
+        padding: 2px;
+        
+    }
+    select{
+        width: 101.3%;
+        padding: 2px;
+    }
+    input[type="button"]{
+        margin-top: 10px;
+        width: 101.3%;
+        padding: 2px;
+        align-self: center;
+    }
 }

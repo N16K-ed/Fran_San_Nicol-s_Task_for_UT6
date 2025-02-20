@@ -11,7 +11,37 @@
         <nav>
             <ul>
                 <li>
-                   <button> Personalizer</button>
+                    <div class="dropdown">
+                        <button class="dropButton">Personalizer</button>
+                        <div class="personalizerContent">
+                            <p>Bg_color</p>
+                            <button id="pink"></button>
+                            <button id="green"></button>
+                            <button id="blue"></button>
+                            <button id="darkgray"></button>
+                            <button id="gray"></button>
+                            <br>
+                            <p>Change_letters</p>
+                            <button id="letterRed"></button>
+                            <button id="letterGreen"></button>
+                            <button id="letterBlue"></button>
+                            <button id="letterBlack"></button>
+                            <button id="letterWhite"></button>
+                            <br>
+                            <button id="per"></button>
+                            <button id="per"></button>
+                            <button id="per"></button>
+                            <button id="per"></button>
+                            <button id="per"></button>
+                            <br>
+                            <button id="per"></button>
+                            <button id="per"></button>
+                            <button id="per"></button>
+                            <button id="per"></button>
+                            <button id="per"></button>
+
+                        </div>
+                    </div>
                 </li>
                 <li>
                     <button><a href="./Form.html">Form</a></button>
@@ -33,6 +63,10 @@
 
 
 
-    <script src="./scripts.js"></script>
+    <script src="./scripts.js">
+        document.getElementById('dropButton').addEventListener('click', () => {
+        document.getElementById('personalizerContent').style.display= block;
+})
+    </script>
 </body>
 </html>
