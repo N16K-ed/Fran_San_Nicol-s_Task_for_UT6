@@ -15,30 +15,30 @@
                         <button class="dropButton">Personalizer</button>
                         <div class="personalizerContent">
                             <p>Bg_color</p>
-                            <button id="pink"></button>
-                            <button id="green"></button>
-                            <button id="blue"></button>
-                            <button id="darkgray"></button>
-                            <button id="gray"></button>
+                            <button id="pink" onclick="changeBGColorPink()"></button>
+                            <button id="green" onclick="changeBGColorGreen()"></button>
+                            <button id="blue" onclick="changeBGColorBlue()"></button>
+                            <button id="darkgray" onclick="changeBGColorYellow()"></button>
+                            <button id="gray" onclick="changeBGColorGray()"></button>
                             <br>
                             <p>Change_letters</p>
-                            <button id="letterRed"></button>
-                            <button id="letterGreen"></button>
-                            <button id="letterBlue"></button>
-                            <button id="letterBlack"></button>
-                            <button id="letterWhite"></button>
+                            <button id="letterRed" onclick="textcolorRED()"></button>
+                            <button id="letterGreen" onclick="textcolorGREEN()"></button>
+                            <button id="letterBlue" onclick="textcolorBLUE()"></button>
+                            <button id="letterBlack" onclick="textcolorBLACK()"></button>
+                            <button id="letterWhite" onclick="textcolorWHITE()"></button>
                             <br>
-                            <button id="per"></button>
-                            <button id="per"></button>
-                            <button id="per"></button>
-                            <button id="per"></button>
-                            <button id="per"></button>
+                            <button id="per" onclick="textsizeXS()">XS</button>
+                            <button id="per" onclick="textsizeS()">S</button>
+                            <button id="per" onclick="textsizeM()">M</button>
+                            <button id="per" onclick="textsizeL()">L</button>
+                            <button id="per" onclick="textsizeXL()">XL</button>
                             <br>
-                            <button id="per"></button>
-                            <button id="per"></button>
-                            <button id="per"></button>
-                            <button id="per"></button>
-                            <button id="per"></button>
+                            <button id="per">A</button>
+                            <button id="per">T</button>
+                            <button id="per">C</button>
+                            <button id="per">F</button>
+                            <button id="per">M</button>
 
                         </div>
                     </div>
@@ -63,10 +63,57 @@
 
 
 
-    <script src="./scripts.js">
-        document.getElementById('dropButton').addEventListener('click', () => {
-        document.getElementById('personalizerContent').style.display= block;
-})
+    <script>
+        document.getElementById('dropButton').addEventListener('click', () => {document.getElementById('personalizerContent').style.display= block;})
+                function changeBGColorPink (){
+                    document.body.style.backgroundColor = "pink";
+                }
+                function changeBGColorGreen(){
+                    document.body.style.backgroundColor = "lightgreen";
+                }
+                function changeBGColorBlue (){
+                    document.body.style.backgroundColor = "lightblue";
+                }
+                function changeBGColorYellow (){
+                    document.body.style.backgroundColor = "rgb(212, 152, 103)";
+                }
+                function changeBGColorGray (){
+                    document.body.style.backgroundColor = "rgb(182, 182, 182)";
+                }
+<!--*********************************************************************************************-->
+                function textcolorRED (){
+                    document.body.style.color = "red";
+                }
+                function textcolorGREEN(){
+                    document.body.style.color = "green";
+                }
+                function textcolorBLUE (){
+                    document.body.style.color = "blue";
+                }
+                function textcolorBLACK (){
+                    document.body.style.color = "black";
+                }
+                function textcolorWHITE (){
+                    document.body.style.color = "white";
+                }
+
+
+                function textsizeXS (){
+                    document.body.style.fontSize = "x-small";
+                }
+                function textsizeS (){
+                    document.body.style.fontSize = "small";
+                }
+                function textsizeM (){
+                    document.body.style.fontSize = "medium";
+                }
+                function textsizeL (){
+                    document.body.style.fontSize = "large";
+                }
+                function textsizeXL (){
+                    document.body.style.fontSize = "x-large";
+                }
+             
     </script>
 </body>
 </html>
