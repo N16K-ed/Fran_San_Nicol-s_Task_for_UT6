@@ -40,8 +40,7 @@ nav > ul{
     button:hover{
         cursor: pointer;
         background-color: #808080;
-        border-radius: 1px;
-        
+        border-radius: 1px;        
     }
     a{
         color: white;

@@ -22,23 +22,23 @@
         <div class="form">
             <form action="./Personalizer.html" id="form">
                 <label for="name">Full Name:</label><br><br>
-                <input type="text" name="name" id="name" placeholder="Enter your full name"><br><br>
+                <input type="text" name="name" id="name" placeholder="Enter your full name" required><br><br>
 
                 <label for="email">Email:</label><br><br>
-                <input type="email" placeholder="Enter your email" id="email">
+                <input type="email" placeholder="Enter your email" id="email" required>
                 <input type="button" id="valid" value="Validate" onclick="validateEmail()">
                 <br>               
                 <br>
                 <p id="emailValidation"></p>
                 
                 <label for="Gender">Gender:</label><br><br>
-                <input type="radio" id="male" name="Gender" value="Male">
+                <input type="radio" id="male" name="Gender" value="Male" required>
                 <label for="male">Male</label>
 
-                <input type="radio" id="female" name="Gender" value="Female">
+                <input type="radio" id="female" name="Gender" value="Female" required>
                 <label for="female">Female</label>
 
-                <input type="radio" id="other" name="Gender" value="Other">
+                <input type="radio" id="other" name="Gender" value="Other" required>
                 <label for="other">Other</label>
                 <br><br>
 
@@ -76,43 +76,18 @@
                 select.setAttribute("name", "province");
     
                 var provinces = {
-                    Spain: [
-                        "Álava", "Albacete", "Alicante", "Almería", "Asturias", "Ávila", 
-                        "Badajoz", "Barcelona", "Burgos", "Cáceres", "Cádiz", "Cantabria", "Castellón", 
-                        "Ceuta", "Ciudad Real", "Córdoba", "Cuenca", "Girona", "Granada", "Guadalajara", 
-                        "Guipúzcoa", "Huelva", "Huesca", "Illes Balears", "Jaén", "La Coruña", "La Rioja", 
-                        "Las Palmas", "León", "Lleida", "Lugo", "Madrid", "Málaga", "Melilla", "Murcia", 
-                        "Navarra", "Ourense", "Palencia", "Pontevedra", "Salamanca", "Santa Cruz de Tenerife", 
-                        "Segovia", "Sevilla", "Soria", "Tarragona", "Teruel", "Toledo", "Valencia", 
-                        "Valladolid", "Vizcaya", "Zamora", "Zaragoza"
-                    ],
-                    England: [
-                        "Bedfordshire", "Berkshire", "Bristol", "Buckinghamshire", "Cambridgeshire", 
-                        "Cheshire", "Cornwall", "Cumbria", "Derbyshire", "Devon", "Dorset", 
-                        "Durham", "East Riding of Yorkshire", "East Sussex", "Essex", "Gloucestershire", 
-                        "Greater London", "Greater Manchester", "Hampshire", "Herefordshire", 
-                        "Hertfordshire", "Isle of Wight", "Kent", "Lancashire", "Leicestershire", 
-                        "Lincolnshire", "Merseyside", "Norfolk", "North Yorkshire", "Northamptonshire", 
-                        "Northumberland", "Nottinghamshire", "Oxfordshire", "Rutland", "Shropshire", 
-                        "Somerset", "South Yorkshire", "Staffordshire", "Suffolk", "Surrey", "Tyne and Wear", 
-                        "Warwickshire", "West Midlands", "West Sussex", "West Yorkshire", "Wiltshire", 
-                        "Worcestershire"
-                    ],
-                    Germany: [
-                        "Baden-Württemberg", "Bavaria", "Berlin", "Brandenburg", "Bremen", 
-                        "Hamburg", "Hesse", "Lower Saxony", "Mecklenburg-Western Pomerania", 
-                        "North Rhine-Westphalia", "Rhineland-Palatinate", "Saarland", 
-                        "Saxony", "Saxony-Anhalt", "Schleswig-Holstein", "Thuringia"
-                    ]
+                    Spain: ["Madrid", "Barcelona", "Valencia", "Sevilla", "Málaga", "Zaragoza"],
+                    England: ["Greater London", "Greater Manchester", "West Midlands", "Merseyside"],
+                    Germany: ["Bavaria", "Berlin", "Hamburg", "North Rhine-Westphalia", "Saxony"]
                 };
-        
+    
                 var defaultOption = document.createElement("option");
                 defaultOption.value = "";
                 defaultOption.textContent = "Select a province";
                 defaultOption.disabled = true;
                 defaultOption.selected = true;
                 select.appendChild(defaultOption);    
-               
+    
                 provinces[country].forEach(function(province) {
                     var option = document.createElement("option");
                     option.value = province;
@@ -123,8 +98,68 @@
                 container.appendChild(label);
                 container.appendChild(document.createElement("br"));
                 container.appendChild(select);
+    
+                // Contenedor de ciudades
+                var cityContainer = document.createElement("div");
+                cityContainer.setAttribute("id", "cityContainer");
+                container.appendChild(cityContainer);
+    
+                // Evento para mostrar ciudades al seleccionar una provincia
+                select.addEventListener("change", function() {
+                    var selectedProvince = this.value;
+                    var cityContainer = document.getElementById("cityContainer");
+                    cityContainer.innerHTML = "";
+    
+                    var cities = {
+                        Spain: {
+                            "Madrid": ["Madrid", "Alcalá de Henares", "Getafe", "Leganés"],
+                            "Barcelona": ["Barcelona", "Hospitalet de Llobregat", "Badalona", "Terrassa"],
+                            "Valencia": ["Valencia", "Gandía", "Torrent", "Paterna"],
+                            "Sevilla": ["Sevilla", "Dos Hermanas", "Alcalá de Guadaíra", "Utrera"]
+                        },
+                        England: {
+                            "Greater London": ["London", "Croydon", "Bromley", "Harrow"],
+                            "Greater Manchester": ["Manchester", "Bolton", "Salford", "Stockport"]
+                        },
+                        Germany: {
+                            "Bavaria": ["Munich", "Nuremberg", "Augsburg", "Regensburg"],
+                            "Berlin": ["Berlin"],
+                            "Hamburg": ["Hamburg"]
+                        }
+                    };
+    
+                    var cityLabel = document.createElement("label");
+                    cityLabel.setAttribute("for", "city");
+                    cityLabel.textContent = "City:";
+    
+                    var citySelect = document.createElement("select");
+                    citySelect.setAttribute("id", "city");
+                    citySelect.setAttribute("name", "city");
+    
+                    var cityDefault = document.createElement("option");
+                    cityDefault.value = "";
+                    cityDefault.textContent = "Select your town";
+                    cityDefault.disabled = true;
+                    cityDefault.selected = true;
+                    citySelect.appendChild(cityDefault);
+    
+                    if (cities[country] && cities[country][selectedProvince]) {
+                        cities[country][selectedProvince].forEach(function(city) {
+                            var option = document.createElement("option");
+                            option.value = city;
+                            option.textContent = city;
+                            citySelect.appendChild(option);
+                        });
+                    }
+    
+                    cityContainer.appendChild(cityLabel);
+                    cityContainer.appendChild(document.createElement("br"));
+                    cityContainer.appendChild(citySelect);
+                });
             }
         });
+    
+    
         function validateEmail() {
             const emailField = document.getElementById("email");
             const emailMessage = document.getElementById("emailValidation");
