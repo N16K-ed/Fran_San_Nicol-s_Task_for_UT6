@@ -39,6 +39,8 @@ nav > ul{
     }
     button:hover{
         cursor: pointer;
+        background-color: #808080;
+        border-radius: 1px;
         
     }
     a{
@@ -47,7 +49,7 @@ nav > ul{
     }
     
 }
-.content{    
+#content{    
     margin-top: 80px;
     margin-left: 10px;
 }
