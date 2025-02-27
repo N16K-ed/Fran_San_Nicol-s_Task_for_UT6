@@ -14,7 +14,7 @@
                     <div class="dropdown">
                         <button class="dropButton">Personalizer</button>
                         <div class="personalizerContent">
-                            <p>Bg_color</p>
+                            <p>Bg_color</p><br>
                             <button id="pink" onclick="changeBGColorPink()"></button>
                             <button id="green" onclick="changeBGColorGreen()"></button>
                             <button id="blue" onclick="changeBGColorBlue()"></button>
@@ -34,11 +34,11 @@
                             <button id="per" onclick="textsizeL()">L</button>
                             <button id="per" onclick="textsizeXL()">XL</button>
                             <br>
-                            <button id="per">A</button>
-                            <button id="per">T</button>
-                            <button id="per">C</button>
-                            <button id="per">F</button>
-                            <button id="per">M</button>
+                            <button id="ArialText" onclick="textfont1()">A</button>
+                            <button id="PapyrusText" onclick="textfont2()">P</button>
+                            <button id="GaramondText" onclick="textfont3()">G</button>
+                            <button id="CourierNewText" onclick="textfont4()">CN</button>
+                            <button id="LucidaConsoleText" onclick="textfont5()">LC</button>
 
                         </div>
                     </div>
@@ -64,7 +64,7 @@
 
 
     <script>
-        document.getElementById('dropButton').addEventListener('click', () => {document.getElementById('personalizerContent').style.display= block;})
+        document.getElementById('dropButton').addEventListener('click', () => {document.getElementById('personalizerContent').style.display= 'block';})
                 function changeBGColorPink (){
                     document.body.style.backgroundColor = "pink";
                 }
@@ -112,6 +112,25 @@
                 }
                 function textsizeXL (){
                     document.getElementById("content").style.fontSize = "x-large";
+                }
+
+
+
+
+                function textfont1() {
+                    document.getElementById("content").style.fontFamily = "Arial";
+                }
+                function textfont2() {
+                    document.getElementById("content").style.fontFamily = "Papyrus";
+                }
+                function textfont3() {
+                    document.getElementById("content").style.fontFamily = "Garamond";
+                }
+                function textfont4() {
+                    document.getElementById("content").style.fontFamily = "Courier New";
+                }
+                function textfont5() {
+                    document.getElementById("content").style.fontFamily = "Lucida Console";
                 }
              
     </script>
