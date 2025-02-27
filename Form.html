@@ -53,7 +53,7 @@
 
                 
                 <div id="provinceContainer"></div>
-
+                <div id="townContainer"></div>
                 <br><br>
                 <input type="submit" name="Send" id="send" value="Send">
             </form>
@@ -98,11 +98,13 @@
                 container.appendChild(label);
                 container.appendChild(document.createElement("br"));
                 container.appendChild(select);
+                container.appendChild(document.createElement("br"));
     
                 // Contenedor de ciudades
+                var form = document.getElementById("townContainer");
                 var cityContainer = document.createElement("div");
                 cityContainer.setAttribute("id", "cityContainer");
-                container.appendChild(cityContainer);
+                form.appendChild(cityContainer);
     
                 // Evento para mostrar ciudades al seleccionar una provincia
                 select.addEventListener("change", function() {
@@ -127,10 +129,12 @@
                             "Hamburg": ["Hamburg"]
                         }
                     };
-    
+                    
+
                     var cityLabel = document.createElement("label");
                     cityLabel.setAttribute("for", "city");
-                    cityLabel.textContent = "City:";
+                    cityLabel.setAttribute("id", "cityLabel");
+                    cityLabel.textContent = "Town:";
     
                     var citySelect = document.createElement("select");
                     citySelect.setAttribute("id", "city");
@@ -151,9 +155,10 @@
                             citySelect.appendChild(option);
                         });
                     }
-    
-                    cityContainer.appendChild(cityLabel);
+
+                    
                     cityContainer.appendChild(document.createElement("br"));
+                    cityContainer.appendChild(cityLabel);                    
                     cityContainer.appendChild(citySelect);
                 });
             }

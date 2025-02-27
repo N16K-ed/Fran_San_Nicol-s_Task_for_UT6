@@ -96,3 +96,7 @@ nav > ul{
     flex-wrap: wrap;
     margin-left: 10px;
 }
+#city{
+    width: auto;    
+    margin-left: 10px;
+}
