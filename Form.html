@@ -13,13 +13,13 @@
                 <li><button><a href="./Personalizer.html">Personalizer</a></button></li>
                 <li><button><a href="./Form.html">Form</a></button></li>
                 <li><button><a href="./Images.html">Images</a></button></li>
-                <li><button id="mode">Mode</button></li>
+                <li><button id="mode" onclick="changeMode()">Mode</button></li>
             </ul>
         </nav>        
     </div>
 
-    <div class="container">
-        <div class="form">
+    <div class="container" id="nightmodeDiv">
+        <div class="form" id="form">
             <form action="./Personalizer.html" id="form">
                 <label for="name">Full Name:</label><br><br>
                 <input type="text" name="name" id="name" placeholder="Enter your full name" required><br><br>
@@ -28,8 +28,9 @@
                 <input type="email" placeholder="Enter your email" id="email" required>
                 <input type="button" id="valid" value="Validate" onclick="validateEmail()">
                 <br>               
-                <br>
+                
                 <p id="emailValidation"></p>
+                <br>
                 
                 <label for="Gender">Gender:</label><br><br>
                 <input type="radio" id="male" name="Gender" value="Male" required>
@@ -49,7 +50,7 @@
                     <option value="England">England</option>
                     <option value="Germany">Germany</option>
                 </select>
-                <br><br>
+                
 
                 
                 <div id="provinceContainer"></div>
@@ -100,13 +101,13 @@
                 container.appendChild(select);
                 container.appendChild(document.createElement("br"));
     
-                // Contenedor de ciudades
+                
                 var form = document.getElementById("townContainer");
                 var cityContainer = document.createElement("div");
                 cityContainer.setAttribute("id", "cityContainer");
                 form.appendChild(cityContainer);
     
-                // Evento para mostrar ciudades al seleccionar una provincia
+                
                 select.addEventListener("change", function() {
                     var selectedProvince = this.value;
                     var cityContainer = document.getElementById("cityContainer");
@@ -176,6 +177,81 @@
             } else {
                 emailMessage.style.color = "red";
                 emailMessage.textContent = emailField.value + " is not correct, please retry :(";
+            }
+        }
+        function changeMode() {
+            const isDarkMode = document.body.style.backgroundColor === "black";
+            
+            if (isDarkMode) {
+                document.body.style.backgroundColor = "white";
+                document.body.style.color = "black";
+                
+                const formElement = document.getElementById("form");
+                formElement.style.backgroundColor = "#f0f0f0"; 
+                formElement.style.padding = "15px";
+                formElement.style.backgroundClip = "padding-box";
+
+                let selectElements = document.querySelectorAll("select, option");
+                selectElements.forEach(function (element) {
+                    element.style.backgroundColor = "#fff"; 
+                    element.style.color = "black"; 
+                    element.style.border = "1px solid black"; 
+                });
+
+                let inputElements = document.querySelectorAll("input");
+                inputElements.forEach(function (element) {
+                    element.style.backgroundColor = "#fff";
+                    element.style.color = "black"; 
+                    element.style.border = "1px solid black";
+                    element.style.padding = "8px";  
+                });
+
+                document.getElementById("mode").textContent = "Mode"; 
+                
+            } else {
+                document.body.style.backgroundColor = "black";
+                document.body.style.color = "white";
+                
+                const formElement = document.getElementById("form");
+                formElement.style.backgroundColor = "#333"; 
+                formElement.style.padding = "15px";
+                formElement.style.backgroundClip = "padding-box"; 
+
+                let selectElements = document.querySelectorAll("select, option");
+                selectElements.forEach(function (element) {
+                    element.style.backgroundColor = "#444"; 
+                    element.style.color = "white"; 
+                    element.style.border = "1px solid white";
+                });
+
+                let inputElements = document.querySelectorAll("input");
+                inputElements.forEach(function (element) {
+                    element.style.backgroundColor = "#444"; 
+                    element.style.color = "white"; 
+                    element.style.border = "1px solid white"; 
+                    element.style.padding = "8px"; 
+                });
+
+                document.getElementById("mode").textContent = "Mode"; 
+            }
+
+            updateDynamicSelects();
+        }
+
+        function updateDynamicSelects() {
+            const provinceSelect = document.getElementById("province");
+            const townSelect = document.getElementById("city");
+
+            if (provinceSelect) {
+                provinceSelect.style.backgroundColor = document.body.style.backgroundColor === "black" ? "#444" : "#fff";
+                provinceSelect.style.color = document.body.style.backgroundColor === "black" ? "white" : "black";
+                provinceSelect.style.border = document.body.style.backgroundColor === "black" ? "1px solid white" : "1px solid black";
+            }
+
+            if (townSelect) {
+                townSelect.style.backgroundColor = document.body.style.backgroundColor === "black" ? "#444" : "#fff";
+                townSelect.style.color = document.body.style.backgroundColor === "black" ? "white" : "black";
+                townSelect.style.border = document.body.style.backgroundColor === "black" ? "1px solid white" : "1px solid black";
             }
         }
     </script>
