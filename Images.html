@@ -28,7 +28,7 @@
     <div id="flexcontainer">
         <div id="content1">
             <h4>Random Raimon Player from Inazuma Eleven</h4>
-            <button>Select your Character!</button><br><br>
+            <button id="changeButton">Select your Character!</button><br><br>
             <img src="./imagenes/logo_raimon.png" alt="ImagenSeleccionada">
         </div>
         <br>
@@ -62,47 +62,11 @@
             selectedImage.src = autoImage.src;
         });
         
-            let isYellowMode = false;
+        let isYellowMode = false;
 
-            function changeMode() {
-                if (!isYellowMode) {
-                    // Yellow Theme
-                    document.body.style.backgroundColor = "yellow";
-                    document.body.style.color = "black";
-
-                    // Change all buttons except those inside the nav
-                    document.querySelectorAll("button:not(nav button)").forEach(button => {
-                        button.style.backgroundColor = "blue";
-                        button.style.color = "white";
-                        button.style.border = "1px solid black";
-                        
-                    });
-
-                    document.querySelectorAll("h4").forEach(h4 => {
-                        h4.style.color = "blue";
-                    });
-
-                    document.getElementById("Mode").textContent = "Mode Changer";
-                } else {
-                    // Original Theme
-                    document.body.style.backgroundColor = "white";
-                    document.body.style.color = "black";
-
-                    document.querySelectorAll("button:not(nav button)").forEach(button => {
-                        button.style.backgroundColor = "";
-                        button.style.color = "";
-                        button.style.border = "";
-                    });
-
-                    document.querySelectorAll("h4").forEach(h4 => {
-                        h4.style.color = "black";
-                    });
-
-                    document.getElementById("Mode").textContent = "Mode Changer";
-                }
-
-                isYellowMode = !isYellowMode;
-            }
+        function changeMode() {
+            document.body.classList.toggle("yellow-mode");
+        }
 </script>
 
     </script>
