@@ -20,20 +20,90 @@
                     <button><a href="./Images.html">Images</a></button>
                 </li>
                 <li>
-                    <button id="Mode" onclick="changeMode()">Mode</button>
+                    <button id="Mode" onclick="changeMode()">Mode Changer</button>
                 </li>
             </ul>
         </nav>        
     </div>
+    <div id="flexcontainer">
+        <div id="content1">
+            <h4>Random Raimon Player from Inazuma Eleven</h4>
+            <button>Select your Character!</button><br><br>
+            <img src="./imagenes/logo_raimon.png" alt="ImagenSeleccionada">
+        </div>
+        <br>
+        <div id="content2">
+            <h4>Random Character Roulette</h4>
+            <img src="./imagenes/logo_raimon.png" alt="TodaslasImagenes">
+        </div>
+    </div>
     <script>
-        function changeMode(){
-            document.body.style.backgroundColor = "Black"
-            document.body.style.color = "White"
+        let images = [
+            "./imagenes/axel_blaze.png","./imagenes/bobby_shearer.png","./imagenes/erik_eagle.png",
+            "./imagenes/jack_wallside.png","./imagenes/jim.png","./imagenes/jude_sharp.png",
+            "./imagenes/kevin_dragonfly.png","./imagenes/mark_evans.png","./imagenes/max.png",
+            "./imagenes/nathan_swift.png","./imagenes/sam.png","./imagenes/steve.png",
+            "./imagenes/tim.png","./imagenes/tod_ironside.png","./imagenes/willy_glass.png",
+        ]; 
 
+        let currentIndex = 0;
+        let autoImage = document.querySelector('img[alt="TodaslasImagenes"]');
+        let selectedImage = document.querySelector('img[alt="ImagenSeleccionada"]');
+        let changeButton = document.querySelector("#content1 button");
 
+        function changeAutoImage() {
+            autoImage.src = images[currentIndex];
+            currentIndex = (currentIndex + 1) % images.length;
         }
 
+        let interval = setInterval(changeAutoImage, 100); 
 
+        changeButton.addEventListener("click", function () {
+            selectedImage.src = autoImage.src;
+        });
+        
+            let isYellowMode = false;
+
+            function changeMode() {
+                if (!isYellowMode) {
+                    // Yellow Theme
+                    document.body.style.backgroundColor = "yellow";
+                    document.body.style.color = "black";
+
+                    // Change all buttons except those inside the nav
+                    document.querySelectorAll("button:not(nav button)").forEach(button => {
+                        button.style.backgroundColor = "blue";
+                        button.style.color = "white";
+                        button.style.border = "1px solid black";
+                        
+                    });
+
+                    document.querySelectorAll("h4").forEach(h4 => {
+                        h4.style.color = "blue";
+                    });
+
+                    document.getElementById("Mode").textContent = "Mode Changer";
+                } else {
+                    // Original Theme
+                    document.body.style.backgroundColor = "white";
+                    document.body.style.color = "black";
+
+                    document.querySelectorAll("button:not(nav button)").forEach(button => {
+                        button.style.backgroundColor = "";
+                        button.style.color = "";
+                        button.style.border = "";
+                    });
+
+                    document.querySelectorAll("h4").forEach(h4 => {
+                        h4.style.color = "black";
+                    });
+
+                    document.getElementById("Mode").textContent = "Mode Changer";
+                }
+
+                isYellowMode = !isYellowMode;
+            }
+</script>
 
     </script>
 </body>
