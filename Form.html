@@ -182,78 +182,153 @@
         function changeMode() {
             const isDarkMode = document.body.style.backgroundColor === "black";
             
-            if (isDarkMode) {
-                document.body.style.backgroundColor = "white";
-                document.body.style.color = "black";
-                
-                const formElement = document.getElementById("form");
-                formElement.style.backgroundColor = "#f0f0f0"; 
-                formElement.style.padding = "15px";
-                formElement.style.backgroundClip = "padding-box";
+            document.body.style.transition = "all 0.3s";
+            document.body.style.backgroundColor = isDarkMode ? "white" : "black";
+            document.body.style.color = isDarkMode ? "black" : "white";
 
-                let selectElements = document.querySelectorAll("select, option");
-                selectElements.forEach(function (element) {
-                    element.style.backgroundColor = "#fff"; 
-                    element.style.color = "black"; 
-                    element.style.border = "1px solid black"; 
-                });
+            const formElement = document.getElementById("form");
+            formElement.style.transition = "all 0.5s";
+            formElement.style.backgroundColor = isDarkMode ? "#f0f0f0" : "#333"; 
+            formElement.style.padding = "15px";
+            formElement.style.backgroundClip = "padding-box"; 
 
-                let inputElements = document.querySelectorAll("input");
-                inputElements.forEach(function (element) {
-                    element.style.backgroundColor = "#fff";
-                    element.style.color = "black"; 
-                    element.style.border = "1px solid black";
-                    element.style.padding = "8px";  
-                });
+            applyStylesToElements("input", isDarkMode ? "#fff" : "#444", isDarkMode ? "black" : "white", isDarkMode ? "1px solid black" : "1px solid white");
+            applyStylesToElements("select", isDarkMode ? "#fff" : "#444", isDarkMode ? "black" : "white", isDarkMode ? "1px solid black" : "1px solid white");
 
-                document.getElementById("mode").textContent = "Mode"; 
-                
-            } else {
-                document.body.style.backgroundColor = "black";
-                document.body.style.color = "white";
-                
-                const formElement = document.getElementById("form");
-                formElement.style.backgroundColor = "#333"; 
-                formElement.style.padding = "15px";
-                formElement.style.backgroundClip = "padding-box"; 
+            document.querySelectorAll("option").forEach(option => {
+                option.style.color = isDarkMode ? "black" : "white";
+            });
 
-                let selectElements = document.querySelectorAll("select, option");
-                selectElements.forEach(function (element) {
-                    element.style.backgroundColor = "#444"; 
-                    element.style.color = "white"; 
-                    element.style.border = "1px solid white";
-                });
-
-                let inputElements = document.querySelectorAll("input");
-                inputElements.forEach(function (element) {
-                    element.style.backgroundColor = "#444"; 
-                    element.style.color = "white"; 
-                    element.style.border = "1px solid white"; 
-                    element.style.padding = "8px"; 
-                });
-
-                document.getElementById("mode").textContent = "Mode"; 
-            }
+            document.getElementById("mode").textContent = "Mode"; 
 
             updateDynamicSelects();
         }
 
-        function updateDynamicSelects() {
-            const provinceSelect = document.getElementById("province");
-            const townSelect = document.getElementById("city");
-
-            if (provinceSelect) {
-                provinceSelect.style.backgroundColor = document.body.style.backgroundColor === "black" ? "#444" : "#fff";
-                provinceSelect.style.color = document.body.style.backgroundColor === "black" ? "white" : "black";
-                provinceSelect.style.border = document.body.style.backgroundColor === "black" ? "1px solid white" : "1px solid black";
-            }
-
-            if (townSelect) {
-                townSelect.style.backgroundColor = document.body.style.backgroundColor === "black" ? "#444" : "#fff";
-                townSelect.style.color = document.body.style.backgroundColor === "black" ? "white" : "black";
-                townSelect.style.border = document.body.style.backgroundColor === "black" ? "1px solid white" : "1px solid black";
-            }
+        function applyStylesToElements(selector, bgColor, color, border) {
+            document.querySelectorAll(selector).forEach(element => {
+                element.style.transition = "all 0.5s";
+                element.style.backgroundColor = bgColor;
+                element.style.color = color;
+                element.style.border = border;
+                element.style.padding = "8px";  
+            });
         }
+
+        function updateDynamicSelects() {
+            document.querySelectorAll("select").forEach(select => {
+                styleSelect(select);
+            });
+        }
+
+        function styleSelect(select) {
+            const isDarkMode = document.body.style.backgroundColor === "black";
+            select.style.backgroundColor = isDarkMode ? "#444" : "#fff";
+            select.style.color = isDarkMode ? "white" : "black";
+            select.style.border = isDarkMode ? "1px solid white" : "1px solid black";
+        }
+
+        document.getElementById("select").addEventListener("change", function() {
+            var country = this.value;
+            var container = document.getElementById("provinceContainer");
+            container.innerHTML = ""; 
+
+            if (country === "Spain" || country === "England" || country === "Germany") {
+                var label = document.createElement("label");
+                label.setAttribute("for", "province");
+                label.textContent = "Province:"; 
+
+                var select = document.createElement("select");
+                select.setAttribute("id", "province");
+                select.setAttribute("name", "province");
+
+                var provinces = {
+                    Spain: ["Madrid", "Barcelona", "Valencia", "Sevilla", "Málaga", "Zaragoza"],
+                    England: ["Greater London", "Greater Manchester", "West Midlands", "Merseyside"],
+                    Germany: ["Bavaria", "Berlin", "Hamburg", "North Rhine-Westphalia", "Saxony"]
+                };
+
+                var defaultOption = document.createElement("option");
+                defaultOption.value = "";
+                defaultOption.textContent = "Select a province";
+                defaultOption.disabled = true;
+                defaultOption.selected = true;
+                select.appendChild(defaultOption);    
+
+                provinces[country].forEach(function(province) {
+                    var option = document.createElement("option");
+                    option.value = province;
+                    option.textContent = province;
+                    select.appendChild(option);
+                });
+
+                container.appendChild(label);
+                container.appendChild(document.createElement("br"));
+                container.appendChild(select);
+                container.appendChild(document.createElement("br"));
+
+                styleSelect(select);
+
+                var form = document.getElementById("townContainer");
+                var cityContainer = document.createElement("div");
+                cityContainer.setAttribute("id", "cityContainer");
+                form.appendChild(cityContainer);
+
+                select.addEventListener("change", function() {
+                    var selectedProvince = this.value;
+                    var cityContainer = document.getElementById("cityContainer");
+                    cityContainer.innerHTML = "";
+
+                    var cities = {
+                        Spain: {
+                            "Madrid": ["Madrid", "Alcalá de Henares", "Getafe", "Leganés"],
+                            "Barcelona": ["Barcelona", "Hospitalet de Llobregat", "Badalona", "Terrassa"],
+                            "Valencia": ["Valencia", "Gandía", "Torrent", "Paterna"],
+                            "Sevilla": ["Sevilla", "Dos Hermanas", "Alcalá de Guadaíra", "Utrera"]
+                        },
+                        England: {
+                            "Greater London": ["London", "Croydon", "Bromley", "Harrow"],
+                            "Greater Manchester": ["Manchester", "Bolton", "Salford", "Stockport"]
+                        },
+                        Germany: {
+                            "Bavaria": ["Munich", "Nuremberg", "Augsburg", "Regensburg"],
+                            "Berlin": ["Berlin"],
+                            "Hamburg": ["Hamburg"]
+                        }
+                    };
+
+                    var cityLabel = document.createElement("label");
+                    cityLabel.setAttribute("for", "city");
+                    cityLabel.setAttribute("id", "cityLabel");
+                    cityLabel.textContent = "Town:";
+
+                    var citySelect = document.createElement("select");
+                    citySelect.setAttribute("id", "city");
+                    citySelect.setAttribute("name", "city");
+
+                    var cityDefault = document.createElement("option");
+                    cityDefault.value = "";
+                    cityDefault.textContent = "Select your town";
+                    cityDefault.disabled = true;
+                    cityDefault.selected = true;
+                    citySelect.appendChild(cityDefault);
+
+                    if (cities[country] && cities[country][selectedProvince]) {
+                        cities[country][selectedProvince].forEach(function(city) {
+                            var option = document.createElement("option");
+                            option.value = city;
+                            option.textContent = city;
+                            citySelect.appendChild(option);
+                        });
+                    }
+
+                    cityContainer.appendChild(document.createElement("br"));
+                    cityContainer.appendChild(cityLabel);                    
+                    cityContainer.appendChild(citySelect);
+
+                    styleSelect(citySelect);
+                });
+            }
+        });
     </script>
     
 </body>
