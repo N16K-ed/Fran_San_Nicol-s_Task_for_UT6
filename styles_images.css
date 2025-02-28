@@ -64,21 +64,25 @@ nav > ul{
 }
 #content1{
     border-radius: 10px;
-    box-shadow: 1px 1px 0px 2px lightgrey;
+    box-shadow: 1px 1px 1svi 8px lightgrey;
     width: 800px;
     padding: 20px;
     margin-top: 40px;
+    background-color: white;
+    transition: background-color 0.3s, color 0.3s;
 }
 #content2{
     border-radius: 10px;
-    box-shadow: 1px 1px 0px 2px lightgrey;
+    box-shadow: 1px 1px 1svi 8px lightgrey;
     width: 800px;
-    padding: 20px;    
+    padding: 20px; 
+    background-color: white;
+    transition: background-color 0.3s, color 0.3s;   
 }
 body {
     background-color: white;
     color: black;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-image 0.3s, color 0.3s;
 }
 
 h4 {
@@ -101,20 +105,30 @@ h4 {
 
 
 .yellow-mode {
-    background-color: yellow;
+    background-image: url("./imagenes/fondo_logo_balnco_definitivo.png");
     color: black;
 }
 
 .yellow-mode h4 {
-    color: blue;
+    color: #fd9800;
 }
 
 .yellow-mode #changeButton {
-    background-color: blue;
+    background-color: #fd9800;
     color: white;
     border: 2px solid black;
 }
 
 .yellow-mode #changeButton:hover {
-    background-color: darkblue;
+    background-color: #fd98006b;
 }
+
+.yellow-mode #content1{
+    background-color:#243644;
+    box-shadow: 1px 1px 1svi 8px#977d56d0;
+}
+.yellow-mode #content2{
+    background-color: #243644;
+    box-shadow: 1px 1px 1svi 8px#977d56d0;
+}
+
